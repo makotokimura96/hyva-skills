@@ -87,6 +87,44 @@ whichever directory your agent reads:
 | Antigravity | `.agents/skills/` (legacy `.agent/skills/`) | `~/.gemini/config/skills/` |
 | Codex | `.codex/skills/` | `~/.codex/skills/` |
 
+## Updating
+
+### Claude Code plugin
+
+Third-party marketplaces do not auto-update by default, so a new commit here
+reaches you only when you ask for it:
+
+```bash
+/plugin marketplace update hyva-skills
+/reload-plugins
+```
+
+The first command re-fetches this repo and updates the installed plugin on disk;
+the second activates it without restarting. From a shell it is
+`claude plugin marketplace update hyva-skills`.
+
+To stop doing that by hand, turn auto-update on once: `/plugin` → **Marketplaces**
+→ `hyva-skills` → **Enable auto-update**. Claude Code then refreshes in the
+background shortly after each session starts and prompts you to `/reload-plugins`.
+
+### Install script
+
+- Symlinked (the default): `git pull` in the clone. Every project pointing at it
+  updates at once — no need to re-run the script.
+- `--copy`: `git pull`, then re-run `install.sh` to refresh the copies.
+
+### Manual copies
+
+`git pull`, then copy the changed skill directories over again.
+
+### Publishing an update (maintainers)
+
+Bump `version` on the plugin entry in `.claude-plugin/marketplace.json` before
+pushing. A plugin version pins the plugin to that string, so installs stay on the
+old copy until the number changes — commits alone are not enough. Omit the
+`version` fields instead and the version falls through to the git commit SHA,
+which makes every push to `main` an update.
+
 ## Usage
 
 Agents load a skill when the request looks relevant, so mostly you just work:
