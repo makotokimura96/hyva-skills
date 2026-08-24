@@ -16,7 +16,9 @@ Content-Security-Policy: default-src 'self'; script-src 'nonce-[random]' 'strict
 
 ## What Hyvä actually ships — verify before trusting the upstream docs
 
-Verified in this repo:
+Read out of the shipped bundle in August 2026. Verify against your own install
+before relying on it — the version below is what these notes were written against,
+not a guarantee:
 
 - Build file: `vendor/hyva-themes/magento2-theme-module/src/view/base/web/js/alpine3-csp.js`
   (plus `alpine3-csp.min.js`), built from `packages/alpinejs` + `packages/csp`.

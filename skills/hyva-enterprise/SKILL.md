@@ -20,11 +20,13 @@ installable nor relevant there. Establish which edition the project runs first:
 on Open Source, treat an Enterprise request as a scoping question and answer it
 with the licensing facts below.
 
-Run Magento CLI through your local stack's wrapper if containerised, e.g.
-`bin/magento setup:upgrade`, and Tailwind lives at
-`vendor/hyva-themes/magento2-default-theme/web/tailwind/` (`make build` / `make watch`).
-Store locales are `fr_FR` and `en_US`, so every Enterprise `i18n/en_US.csv`
-phrase added by an upgrade needs a `fr_FR` counterpart.
+Commands are written bare; on a containerised local stack (Warden, DDEV, plain
+docker compose) prefix every `bin/magento` call with your own wrapper. With no child
+theme under `app/design`, the Tailwind source is the vendor default theme's,
+`vendor/hyva-themes/magento2-default-theme/web/tailwind/` — build it with the theme's
+`npm run build` / `npm run watch`, or whatever the project wraps those in. Every
+Enterprise `i18n/en_US.csv` phrase added by an upgrade needs a counterpart in each
+store locale the project actually runs.
 
 ## References
 

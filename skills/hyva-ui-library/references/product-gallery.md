@@ -67,7 +67,7 @@ with the chosen gallery, and confirm your Hyvä UI Library version is new enough
 ```
 
 When the theme is a child of the Hyvä default theme the block goes in
-that child theme's `etc/view.xml`; rebuild Tailwind with `make build` after copying a
+that child theme's `etc/view.xml`; rebuild Tailwind (`npm run build`) after copying a
 gallery component in.
 
 ## Options that behave unexpectedly

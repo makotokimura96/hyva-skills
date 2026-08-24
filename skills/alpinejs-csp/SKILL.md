@@ -59,12 +59,18 @@ Non-negotiable under Hyvä's CSP build. Details and the full table are in `refer
 ## Verify, don't trust the upstream page
 
 The current <https://alpinejs.dev/advanced/csp> page documents a **newer and much more
-permissive** CSP evaluator than the one Hyvä ships. The bundle in this repo is
-`vendor/hyva-themes/magento2-theme-module/src/view/base/web/js/alpine3-csp.js`,
-version **3.14.3**, whose evaluator is a bare dot-path lookup — it supports none of
-the `count++`, `count > 5`, `'Hello ' + name` or ternary forms that page advertises.
-Treat the upstream "not supported" list as the **floor, not the ceiling**, and
-re-verify the bundle after any Alpine or Hyvä upgrade.
+permissive** CSP evaluator than the one Hyvä ships. The rules above were read out of
+the shipped bundle,
+`vendor/hyva-themes/magento2-theme-module/src/view/base/web/js/alpine3-csp.js`, at
+Alpine **3.14.3** — the version current when these notes were written (August 2026).
+That evaluator is a bare dot-path lookup: it supports none of the `count++`,
+`count > 5`, `'Hello ' + name` or ternary forms that page advertises. Treat the
+upstream "not supported" list as the **floor, not the ceiling**.
+
+Do not take 3.14.3 on trust — check the install in front of you. Read the version
+string at the top of that file, and confirm the evaluator is still the dot-path
+`reduce` quoted in `references/csp-mode.md`. Re-check after any Alpine or Hyvä
+upgrade: a more permissive evaluator would relax every rule above.
 
 ## Debugging
 

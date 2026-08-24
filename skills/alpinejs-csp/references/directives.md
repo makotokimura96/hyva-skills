@@ -344,7 +344,7 @@ Only works with `x-show`, never `x-if`. Bare `x-transition` applies default fade
 ```
 
 Fully CSP-safe. Remember these classes must survive Tailwind's purge — they are in the markup,
-so rebuild with `make build` (or `make watch`) after adding them.
+so rebuild Tailwind (`npm run build`, or `npm run watch` while iterating) after adding them.
 <https://alpinejs.dev/directives/transition> <https://alpinejs.dev/essentials/templating>
 
 ## `x-cloak`

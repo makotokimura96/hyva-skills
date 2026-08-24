@@ -45,7 +45,7 @@ Upgrades: `composer update --with-dependencies hyva-themes/magento2-hyva-checkou
 Magewire is pulled in as a dependency — never install it separately.
 
 **Containerised stacks:** run the CLI through your container, e.g.
-`bin/magento cache:flush`; Tailwind rebuilds via `make build` / `make watch`.
+`bin/magento cache:flush`; Tailwind rebuilds via `npm run build` / `npm run watch`.
 
 Admin: *Stores > Configuration > Hyvä Themes > Checkout*. The **General > Checkout** select
 defaults to "Magento Luma (original)"; switch it to "Hyvä Default" (or a custom checkout) per

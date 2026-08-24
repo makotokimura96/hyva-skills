@@ -44,8 +44,8 @@ composer require hyva-themes/magento2-hyva-widgets:dev-main
 ```
 
 Run the CLI through your container wrapper if containerised, e.g.
-`bin/magento setup:upgrade`, then rebuild Tailwind with
-`make build` so any widget classes used by the templates are compiled.
+`bin/magento setup:upgrade`, then rebuild Tailwind (`npm run build`) so any widget
+classes used by the templates are compiled.
 
 <https://docs.hyva.io/hyva-widgets/getting-started.html>
 

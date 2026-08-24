@@ -24,8 +24,8 @@ composer update --with-dependencies hyva-themes/magento2-hyva-enterprise-b2b-che
 composer update --with-dependencies <package-name>:x.y.z
 ```
 
-Then `bin/magento setup:upgrade` and rebuild Tailwind (e.g.
-`bin/magento setup:upgrade` and `make build`).
+Then `bin/magento setup:upgrade` and rebuild Tailwind (`npm run build` in the
+theme's `web/tailwind` directory, or whatever target the project wraps it in).
 
 ## The default-theme trap
 
@@ -146,7 +146,7 @@ template-level lookups working.
 (`escapeJs()` in JS context, `escapeHtml()` for label text, `escapeHtmlAttr()` for
 attributes), add missing `translate="true"` on XML arguments, and add phrases to
 `src/i18n/en_US.csv`. With more than one store locale, every such batch means new
-untranslated strings until the `fr_FR` dictionary is updated.
+untranslated strings until every non-`en_US` dictionary is updated.
 
 **Config gating.** Features get gated by system config, e.g. the RMA Return button
 is now `ifconfig="sales/magento_rma/enabled"` across all sales/RMA order layouts.

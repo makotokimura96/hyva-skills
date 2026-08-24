@@ -313,7 +313,7 @@ longer supported. <https://alpinejs.dev/upgrade-guide>
   changes take effect immediately but must be committed in that package's own repo to survive a
   fresh `composer install`.
 - Template edits need a cache flush: `bin/magento cache:flush`.
-- New Tailwind classes need a rebuild: `make build`, or `make watch` while iterating. Tailwind
+- New Tailwind classes need a rebuild: `npm run build`, or `npm run watch` while iterating. Tailwind
   lives at `vendor/hyva-themes/magento2-default-theme/web/tailwind/`.
 - Icons: `$heroiconsoutline->xxxHtml()` / `$heroiconssolid->xxxHtml()` resolve via `__call` to a
   kebab-cased `.svg` in the icon set directory, so the method name must match an existing file —
