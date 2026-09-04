@@ -5,14 +5,14 @@
   },
   "metadata": {
     "description": "Unofficial reference skills for Magento 2 Hyvä development: theme, checkout, commerce, enterprise, admin grids, UI library, and Alpine.js under strict CSP.",
-    "version": "1.0.2"
+    "version": "1.0.3"
   },
   "plugins": [
     {
       "name": "hyva-skills",
       "source": "./",
       "description": "Seven reference skills distilled from the official Hyvä documentation — Hyvä Theme, Hyvä Checkout, Hyvä Commerce, Hyvä Enterprise, Hyvä Admin grids, Hyvä UI Library and Hyvä Widgets, and Alpine.js as it actually behaves under Hyvä's strict CSP build.",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "category": "development",
       "keywords": [
         "magento",

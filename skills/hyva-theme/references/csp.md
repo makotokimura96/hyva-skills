@@ -368,6 +368,7 @@ hyva.createBooleanObject('hidden', false,
 | `x-model="prop"` | `:value` + `@input` (or `@change`/`:checked`/`:selected`) |
 | `x-for="item in method('arg')"` | pre-compute the array, reference the property |
 | `x-spread` | replace with `x-bind` (Alpine v3) |
+| a directive that "needs a component" | check for an ancestor `x-data` **first** — scope is inherited, so a member on a grandparent already resolves. Repeating a component the ancestor already has duplicates the instance silently (no console warning): `init()` runs twice and the visible markup stays bound to the outer copy |
 
 ## The CSP migration tool
 

@@ -20,6 +20,37 @@ Three scopes, in order of preference:
 </div>
 ```
 
+**Nest deliberately, never to reach a member.** Because a descendant resolves through every
+ancestor scope, any property, getter or method defined two levels up already works where it
+stands — for every directive, not just event handlers. Adding a closer `x-data` to "give the
+element a component" creates a second instance with its own state and its own `init()`: the
+classic silent bug when converting inline markup to Alpine. Add `x-data` only when the inner
+block genuinely needs state of its own.
+
+```html
+<!-- WRONG: initPanel is already on the ancestor. Two instances now exist. -->
+<div x-data="initPanel">
+    <div x-data="initPanel">                    <!-- added to "give the button a component" -->
+        <button x-on:click="toggle">toggle</button>
+    </div>
+    <span x-text="status"></span>               <!-- stays "CLOSED" forever -->
+    <span x-show="open">panel</span>            <!-- never appears -->
+</div>
+
+<!-- RIGHT: the button resolves `toggle` through the ancestor chain unaided. -->
+<div x-data="initPanel">
+    <div>
+        <button x-on:click="toggle">toggle</button>
+    </div>
+    <span x-text="status"></span>
+    <span x-show="open">panel</span>
+</div>
+```
+
+Measured on Alpine 3.14.3 (the build in `magento2-theme-module` 1.5.2): the wrong version runs
+`init()` twice, the click mutates instance 2, the outer `x-text` still reads `CLOSED` and the
+outer `x-show` stays hidden — with **no console warning**, because the expression resolved fine.
+
 Alpine's own first recommendation for re-use in a backend-templated app is to **extract the HTML
 into a template partial**, not to invent an abstraction — in Magento that means a `.phtml` you
 include, with `Alpine.data()` registered once. <https://alpinejs.dev/essentials/state>

@@ -55,6 +55,17 @@ Non-negotiable under Hyvä's CSP build. Details and the full table are in `refer
 10. `$event` dot paths resolve inside `x-on`, so `$event.detail` works and
     `$event.target.remove` works (function auto-invoked), but `$event.target.remove()`
     does not.
+11. **Never add `x-data` to make a directive resolve — look up the tree first.** Scope is
+    inherited, and this holds for *every* directive, not just event handlers: `@click`,
+    `x-show`, `x-text`, `x-bind`/`:class`, `:value` + `@input`, `@change`, `@submit`, `x-if`
+    and `x-for` all resolve through the whole ancestor chain. A property, getter or method on
+    a grandparent already works where it stands, with no new wrapper. Adding `x-data` to a
+    closer parent starts a **second, independent instance**. It is worst when the wrapper
+    repeats a component an ancestor already has: `init()` runs twice, handlers mutate the inner
+    copy while markup bound to the outer one never updates, and same-named properties shadow the
+    ancestor's, so reads return the wrong instance. `$root` also re-points to the inner element.
+    There is **no console warning** — the expression resolved fine. Put the member on the
+    existing component; add `x-data` only when the block genuinely needs state of its own.
 
 ## Verify, don't trust the upstream page
 
@@ -62,7 +73,7 @@ The current <https://alpinejs.dev/advanced/csp> page documents a **newer and muc
 permissive** CSP evaluator than the one Hyvä ships. The rules above were read out of
 the shipped bundle,
 `vendor/hyva-themes/magento2-theme-module/src/view/base/web/js/alpine3-csp.js`, at
-Alpine **3.14.3** — the version current when these notes were written (August 2026).
+Alpine **3.14.3**, as shipped by `hyva-themes/magento2-theme-module` **1.5.2**.
 That evaluator is a bare dot-path lookup: it supports none of the `count++`,
 `count > 5`, `'Hello ' + name` or ternary forms that page advertises. Treat the
 upstream "not supported" list as the **floor, not the ceiling**.

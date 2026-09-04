@@ -22,7 +22,7 @@ not a guarantee:
 
 - Build file: `vendor/hyva-themes/magento2-theme-module/src/view/base/web/js/alpine3-csp.js`
   (plus `alpine3-csp.min.js`), built from `packages/alpinejs` + `packages/csp`.
-- Version string in the bundle: **`3.14.3`**.
+- Version string in the bundle: **`3.14.3`**, as shipped by `hyva-themes/magento2-theme-module` **1.5.2**.
 - CSP-compatible theme package: `hyva-themes/magento2-default-theme-csp` ("Hyvä Default CSP").
 
 **This matters a lot.** The current `alpinejs.dev/advanced/csp` page documents a *newer,
@@ -243,3 +243,13 @@ Grepped out of `alpine3-csp.js` — nothing else exists at runtime unless you lo
    unknown attribute).
 5. An element using directives with no ancestor `x-data` — `x-bind`, `x-on`, `x-model`, `x-if`,
    `x-for`, `x-ref`, `x-id` and `x-transition` all require it.
+6. The opposite error: a **redundant `x-data` nested inside an existing component**, usually
+   added while converting inline markup — an `onclick`, but equally an `x-show`, `x-text`,
+   `x-model`, `:class`, `@input` or `@submit`. The expression still resolves, because scope is
+   inherited, so there is **no console warning at all** — this one never announces itself. What
+   breaks is state, and only when the inner `x-data` repeats a component the ancestor already
+   has: handlers mutate the duplicate while the visible markup stays bound to the outer one,
+   same-named properties shadow the ancestor's, and `init()` has run twice. A nested `x-data`
+   naming a *different* component still resolves the ancestor's members correctly — it just adds
+   a scope you did not need. Delete the inner `x-data` and put the member on the ancestor's
+   factory.
